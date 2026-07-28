@@ -1,0 +1,6 @@
+qr-generator/
+│── package.json
+│── server.js
+│── .gitignore
+└── public/
+    └── index.html
