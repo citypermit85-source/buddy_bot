@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Generator</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            text-align:center;
+            margin-top:50px;
+        }
+
+        input{
+            width:350px;
+            padding:10px;
+        }
+
+        button{
+            padding:10px 20px;
+            cursor:pointer;
+        }
+
+        img{
+            margin-top:20px;
+            width:250px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>QR Code Generator</h1>
+
+<input
+id="text"
+placeholder="Enter website, text, email, phone..."
+>
+
+<button onclick="generate()">
+Generate
+</button>
+
+<br>
+
+<img id="qr">
+
+<script>
+
+async function generate(){
+
+const text=document.getElementById("text").value;
+
+const res=await fetch("/generate",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({text})
+
+});
+
+const data=await res.json();
+
+if(data.success){
+document.getElementById("qr").src=data.qr;
+}
+
+}
+
+</script>
+
+</body>
+</html>
